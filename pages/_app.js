@@ -1,5 +1,7 @@
 import "../styles/globals.css";
 // available in every pages
+import NavBar from "../components/navbar";
+import Head from "next/head";
 import { createContext, useReducer } from "react";
 
 export const StoreContext = createContext();
@@ -33,8 +35,12 @@ const StoreProvider = ({ children }) => {
 function MyApp({ Component, pageProps }) {
   return (
     <StoreProvider>
+      <Head>
+        <title>Vote Swag</title>
+        <meta name="description" content="Vote your fav swag" />
+      </Head>
+      <NavBar />
       <Component {...pageProps} />
-      <footer>Footer</footer>
     </StoreProvider>
   );
 }

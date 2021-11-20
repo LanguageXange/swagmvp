@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { findAllSwags } from "../../util/airtable";
-
 export async function getStaticProps(context) {
   const myData = await findAllSwags();
   return {
@@ -20,7 +19,36 @@ const SwagStore = (props) => {
       <div className="w-full grid grid-cols-3 gap-4 mx-auto max-w-7xl">
         {itemsArr.map((item) => {
           return (
-            <div class="justify-center items-center bg-white shadow-lg rounded-lg ">
+            <div class="card bordered justify-between">
+              <figure className="px-16 py-8">
+                <img src={item.image[0].url} alt={item.name} />
+              </figure>
+              <div class="card-body justify-end">
+                <h2 class="card-title">
+                  {item.name}
+                  {item.tag ? (
+                    <div class="badge mx-2 badge-secondary">{item.tag}</div>
+                  ) : null}
+                </h2>
+                <p className="flex-1">{item.desc}</p>
+                <div class="justify-end card-actions">
+                  <Link href={`/store/${item.itemId}`}>
+                    <a className="btn btn-secondary">More info</a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};
+
+export default SwagStore;
+
+{
+  /* <div class="justify-center items-center bg-white shadow-lg rounded-lg ">
               <Link href={`/store/${item.itemId}`}>
                 <a>Go to this item</a>
               </Link>
@@ -49,12 +77,5 @@ const SwagStore = (props) => {
                   </button>
                 </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </>
-  );
-};
-
-export default SwagStore;
+            </div> */
+}

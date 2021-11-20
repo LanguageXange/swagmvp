@@ -1,15 +1,27 @@
-import { useRouter } from "next/router";
-import Link from "next/link";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
 import { findAllSwags } from "../../util/airtable";
 import { handleUpvote } from "../../util/increaseVote";
-// update the votes in the db
+import RedirectComponent from "../../components/redirect";
+
+// increase vote - mario theme coin sound effect
+// home page use island illustration
+// a page for playground you can drag and drop the itme image to play around with it?
 export async function getStaticProps(context) {
   const myData = await findAllSwags();
+  const swag = myData.find(
+    (data) => data.itemId.toString() === context.params.id
+  );
+  if (!swag) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
-    props:
-      myData.find((data) => data.itemId.toString() === context.params.id) || {},
+    props: swag,
   };
 }
 
@@ -28,16 +40,15 @@ export async function getStaticPaths() {
   };
 }
 
-// API resolved without sending a response for /api/updateVotes,
 const SwagItem = (props) => {
-  const { desc, name, votes, itemId } = props;
+  const { desc, name, itemId, image } = props;
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [success, setSuccess] = useState(false);
   const [localVote, setLocalVote] = useState(0);
   const fetcher = (url) => fetch(url).then((res) => res.json());
   if (!props.itemId) {
-    return <div>no such item</div>;
+    return <RedirectComponent />;
   }
   const { data, isValidating } = useSWR(
     `/api/getItemByid?id=${itemId}`,
@@ -51,41 +62,51 @@ const SwagItem = (props) => {
   }, [data]);
 
   const handleClick = async () => {
+    setLocalVote(localVote + 1);
+    setSuccess(true);
     try {
       const res = await handleUpvote(itemId);
       if (res) {
-        setLocalVote(localVote + 1);
         setDisabled(true);
-        setSuccessMessage("voted");
       }
     } catch (err) {
       setErrorMessage(err.message);
     }
   };
   return (
-    <div>
-      <h1>Swag SwagItem {itemId} </h1>
+    <div class="flex items-center justify-center w-full px-4 py-10 mx-auto border-black border-4">
+      <div class="card glass lg:card-side text-neutral-content">
+        <div className="relative">
+          <figure class="p-6">
+            <img src={image[0].url} class="max-w-sm rounded-2xl shadow-xl" />
+          </figure>
+          <div class="absolute right-2 top-4">
+            <div
+              className={`${
+                success && "animate-bling"
+              } badge p-4 bg-red-400 border-none`}
+              onTransitionEnd={() => setSuccess(false)}
+            >
+              ❤ {localVote}
+            </div>
+          </div>
+        </div>
 
-      <h2>{name}</h2>
-      <h3>{desc}</h3>
-      {isValidating ? <p>Loading...</p> : <p>SWR: {data.votes}</p>}
-      <h3>{localVote}</h3>
-      <h3>error: {errorMessage}</h3>
+        <div class="max-w-md card-body">
+          <h2 class="card-title">{name}</h2>
+          <p>{desc}</p>
 
-      <h3>successMessage: {successMessage}</h3>
-      <button
-        value="button"
-        class="w-max my-4 px-4 py-2 text-white hover:bg-blue-700 bg-blue-500 disabled:opacity-20 disabled:cursor-not-allowed"
-        onClick={handleClick}
-        disabled={isValidating || disabled}
-      >
-        +1
-      </button>
-      <img src={"/asset/rocket_green.svg"} />
-      <br />
-      <Link href="/">
-        <a>Home</a>
-      </Link>
+          <div class="card-actions">
+            <button
+              className=" glass rounded-full p-4 text-lg hover:bg-yellow-400 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-50"
+              onClick={handleClick}
+              disabled={isValidating || disabled}
+            >
+              + 1
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

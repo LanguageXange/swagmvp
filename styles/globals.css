@@ -8,6 +8,7 @@ body {
   font-family: BlinkMacSystemFont, Segoe UI, Roboto, Oxygen;
   /* background: fixed url("/asset/lucasben.jpg") no-repeat center; */
   background: fixed url("/asset/bg.png") no-repeat center;
+  /* background-color: #000; */
 }
 
 @font-face {
@@ -31,11 +32,10 @@ a {
 }
 
 footer {
-  margin-top: 80px;
-  text-align: center;
+  text-align: left;
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 2.8rem 0;
   color: #fff;
   background-color: #000;
 }
