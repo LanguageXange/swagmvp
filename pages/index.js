@@ -1,5 +1,5 @@
 import Image from "next/image";
-import islandPic from "../public/static/island.svg";
+import islandPic from "/static/island.svg";
 
 export default function Home() {
   return (
