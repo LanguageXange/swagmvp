@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { findAllSwags } from "../../util/airtable";
 import { handleUpvote } from "../../util/increaseVote";
 import Lottie from "react-lottie";
-import animationData from "../../public/asset/lottieheart.json";
+import animationData from "../../../asset/lottieheart.json";
 
 // increase vote - mario theme coin sound effect
 // home page use island illustration
