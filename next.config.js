@@ -9,6 +9,7 @@ module.exports = {
       "https://icons8.com/mega-creator/illustration/",
       "localhost",
       "dl.airtable.com",
+      "via.placeholder.com",
     ],
   },
 };

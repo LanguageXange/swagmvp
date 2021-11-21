@@ -51,15 +51,18 @@ const SwagItem = (props) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  const { desc, name, itemId, image } = props;
+  const {
+    desc = "no description",
+    name = "no such item",
+    itemId,
+    image = [{ url: "https://via.placeholder.com/300" }],
+  } = props;
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [success, setSuccess] = useState(false);
   const [localVote, setLocalVote] = useState(0);
   const fetcher = (url) => fetch(url).then((res) => res.json());
-  if (!props.itemId) {
-    return <RedirectComponent />;
-  }
+
   const { data, isValidating } = useSWR(
     `/api/getItemByid?id=${itemId}`,
     fetcher
