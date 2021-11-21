@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { findAllSwags } from "../../util/airtable";
 import { handleUpvote } from "../../util/increaseVote";
@@ -87,10 +88,16 @@ const SwagItem = (props) => {
       <div className="card glass lg:card-side text-neutral-content">
         <div className="relative">
           <figure className="p-6 ">
-            <img src={image[0].url} className="max-w-sm rounded-2xl  " />
+            <Image
+              src={image[0].url}
+              className="rounded-2xl"
+              alt={"product detail"}
+              height={300}
+              width={300}
+            />
           </figure>
 
-          <div className="absolute right-1 bottom-4">
+          <div className="absolute right-12 md:right-4 lg:right-0 bottom-4">
             <div
               className={`${
                 success && "animate-bling"
@@ -107,12 +114,12 @@ const SwagItem = (props) => {
           ) : null}
         </div>
 
-        <div className="max-w-lg card-body border-l-2 border-white border-dashed border-opacity-25 text-black">
+        <div className="max-w-lg card-body border-l-2 border-white border-dashed border-opacity-10 text-black">
           <h2 className="card-title">{name}</h2>
           <p>{desc}</p>
 
           <div className="card-actions">
-            <div data-tip="upvote me!" class="tooltip tooltip-right">
+            <div data-tip="upvote me!" className="tooltip tooltip-right">
               <button
                 className="animate-bounce glass rounded-lg pb-1 pt-2 px-8 text-lg hover:bg-green-400 disabled:animate-none disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-50"
                 onClick={handleClick}

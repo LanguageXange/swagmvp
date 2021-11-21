@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { findAllSwags } from "../../util/airtable";
+import Image from "next/image";
+
 export async function getStaticProps(context) {
   const myData = await findAllSwags();
   return {
@@ -14,9 +16,17 @@ const SwagStore = (props) => {
     <div className="w-full p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-12 mx-auto max-w-7xl ">
       {itemsArr.map((item) => {
         return (
-          <div className="glass card bordered justify-between hover:bg-black hover:bg-opacity-75 hover:text-white">
+          <div
+            className="glass card bordered justify-between hover:bg-black hover:bg-opacity-30 hover:text-white"
+            key={item.itemId}
+          >
             <figure className="px-20 py-8">
-              <img src={item.image[0].url} alt={item.name} />
+              <Image
+                src={item.image[0].url}
+                alt={item.name}
+                width={500}
+                height={500}
+              />
             </figure>
             <div className="card-body justify-end">
               <h2 className="card-title">
