@@ -1,4 +1,5 @@
 import Image from "next/image";
+import islandPic from "../public/static/island.svg";
 
 export default function Home() {
   return (
@@ -6,7 +7,7 @@ export default function Home() {
       <div className="bg-gray-400 bg-opacity-50">
         <div className="max-h-full w-1/2 mx-auto py-24 ">
           <Image
-            src="/static/island.svg"
+            src={islandPic}
             className="hover:transform skew-y-12"
             alt="island"
             width={1200}

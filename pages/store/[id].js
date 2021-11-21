@@ -96,6 +96,7 @@ const SwagItem = (props) => {
               alt={"product detail"}
               height={300}
               width={300}
+              priority
             />
           </figure>
 
