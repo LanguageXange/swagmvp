@@ -6,7 +6,7 @@ export default function Home() {
       <div className="bg-gray-400 bg-opacity-50">
         <div className="max-h-full w-1/2 mx-auto py-24 ">
           <Image
-            src="/asset/island.svg"
+            src="/island.svg"
             className="hover:transform skew-y-12"
             alt="island"
             width={1200}

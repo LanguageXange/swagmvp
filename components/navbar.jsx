@@ -7,7 +7,7 @@ const NavBar = () => {
         <span className="font-semibold text-xl tracking-tight">SwagHunt</span>
         <Image
           className="w-16 transform rotate-45"
-          src="/asset/rocket_green.svg"
+          src="/rocket_green.svg"
           alt="rocket logo"
           width={75}
           height={60}

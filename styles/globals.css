@@ -7,18 +7,15 @@ body {
   margin: 0;
   font-family: monospace, "Times New Roman", Times, serif, Segoe UI, Roboto,
     Oxygen;
-  /* background: fixed url("/asset/lucasben.jpg") no-repeat center center;
-  background-size: cover;
-  background-blend-mode: darken; */
 
-  background: fixed url("/asset/bg.png") no-repeat center;
+  background: fixed url("/bg.png") no-repeat center;
 
   /* background-color: rgba(102, 89, 89, 0.808); */
 }
 
 @font-face {
   font-family: "Dambuleff";
-  src: url("/fonts/Dambuleff-Regular.otf");
+  src: url("/Dambuleff-Regular.otf");
 }
 
 /* In your css file where you want to use the font */
