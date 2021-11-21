@@ -6,7 +6,7 @@ const Card = () => {
       <Link href="/">
         <a>
           <Image
-            src="/no-connection.gif"
+            src="/static/no-connection.gif"
             alt="no connection"
             height={500}
             width={650}
