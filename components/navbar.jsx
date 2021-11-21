@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import rocketIcon from "../public/static/rocket_green.svg";
 const NavBar = () => {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-black px-12 py-4">
@@ -8,7 +7,7 @@ const NavBar = () => {
         <span className="font-semibold text-xl tracking-tight">SwagHunt</span>
         <Image
           className="w-16 transform rotate-45"
-          src={rocketIcon}
+          src="/static/rocket_green.svg"
           alt="rocket logo"
           width={75}
           height={60}
