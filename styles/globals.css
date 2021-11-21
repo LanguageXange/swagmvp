@@ -5,10 +5,15 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: BlinkMacSystemFont, Segoe UI, Roboto, Oxygen;
-  /* background: fixed url("/asset/lucasben.jpg") no-repeat center; */
+  font-family: monospace, "Times New Roman", Times, serif, Segoe UI, Roboto,
+    Oxygen;
+  /* background: fixed url("/asset/lucasben.jpg") no-repeat center center;
+  background-size: cover;
+  background-blend-mode: darken; */
+
   background: fixed url("/asset/bg.png") no-repeat center;
-  /* background-color: #000; */
+
+  /* background-color: rgba(102, 89, 89, 0.808); */
 }
 
 @font-face {

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { findAllSwags } from "../../util/airtable";
 import { handleUpvote } from "../../util/increaseVote";
 import RedirectComponent from "../../components/redirect";
+import Lottie from "react-lottie";
+import animationData from "../../public/asset/lottieheart";
 
 // increase vote - mario theme coin sound effect
 // home page use island illustration
@@ -41,6 +43,13 @@ export async function getStaticPaths() {
 }
 
 const SwagItem = (props) => {
+  const defaultOptions = {
+    loop: false,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   const { desc, name, itemId, image } = props;
   const [disabled, setDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -74,36 +83,44 @@ const SwagItem = (props) => {
     }
   };
   return (
-    <div class="flex items-center justify-center w-full px-4 py-10 mx-auto border-black border-4">
-      <div class="card glass lg:card-side text-neutral-content">
+    <div className="flex items-center justify-center w-full px-8 md:px-4 py-10 mx-auto">
+      <div className="card glass lg:card-side text-neutral-content">
         <div className="relative">
-          <figure class="p-6">
-            <img src={image[0].url} class="max-w-sm rounded-2xl shadow-xl" />
+          <figure className="p-6 ">
+            <img src={image[0].url} className="max-w-sm rounded-2xl  " />
           </figure>
-          <div class="absolute right-2 top-4">
+
+          <div className="absolute right-1 bottom-4">
             <div
               className={`${
                 success && "animate-bling"
-              } badge p-4 bg-red-400 border-none`}
-              onTransitionEnd={() => setSuccess(false)}
+              } badge pt-4 pb-3 px-4 bg-red-400 border-none`}
+              onAnimationEnd={() => setSuccess(false)}
             >
               ❤ {localVote}
             </div>
           </div>
+          {success ? (
+            <div className="absolute left-1/2 top-1/2 transform -translate-y-1/2 -translate-x-1/2">
+              <Lottie options={defaultOptions} height={200} width={200} />
+            </div>
+          ) : null}
         </div>
 
-        <div class="max-w-md card-body">
-          <h2 class="card-title">{name}</h2>
+        <div className="max-w-lg card-body border-l-2 border-white border-dashed border-opacity-25 text-black">
+          <h2 className="card-title">{name}</h2>
           <p>{desc}</p>
 
-          <div class="card-actions">
-            <button
-              className=" glass rounded-full p-4 text-lg hover:bg-yellow-400 disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-50"
-              onClick={handleClick}
-              disabled={isValidating || disabled}
-            >
-              + 1
-            </button>
+          <div className="card-actions">
+            <div data-tip="upvote me!" class="tooltip tooltip-right">
+              <button
+                className="animate-bounce glass rounded-lg pb-1 pt-2 px-8 text-lg hover:bg-green-400 disabled:animate-none disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-50"
+                onClick={handleClick}
+                disabled={isValidating || disabled}
+              >
+                ⮝
+              </button>
+            </div>
           </div>
         </div>
       </div>

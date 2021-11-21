@@ -1,40 +1,35 @@
-const RankPage = () => {
+import { findAllSwags } from "../util/airtable";
+export async function getStaticProps() {
+  const myData = await findAllSwags();
+  return {
+    props: { ...myData },
+  };
+}
+
+const RankPage = (props) => {
+  const itemsArr = Object.values(props).sort((a, b) => b.votes - a.votes);
   return (
-    <div class="overflow-x-auto">
-      <table class="table w-full">
+    <div className="flex justify-center mx-auto my-12 ">
+      <table className="table table-zebra w-11/12 md:w-9/12 bg-white">
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th className="w-1/2">Product Name</th>
+            <th>Price</th>
+            <th>Votes</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
-          <tr>
-            <th>4</th>
-            <td>Marjy Ferencz</td>
-            <td>Office Assistant I</td>
-            <td>Crimson</td>
-          </tr>
+          {itemsArr.map((item, index) => {
+            return (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item.name}</td>
+                <td>${item.price}</td>
+                <td>{item.votes}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

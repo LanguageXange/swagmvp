@@ -2,29 +2,37 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <nav class="flex items-center justify-between flex-wrap bg-black px-12 py-4">
-      <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-lg tracking-tight">SwagHunt</span>
-        <img class="w-16 transform rotate-45" src="/asset/rocket_green.svg" />
+    <nav className="flex items-center justify-between flex-wrap bg-black px-12 py-4">
+      <div className="flex items-center flex-shrink-0 text-white mr-8">
+        <span className="font-semibold text-xl tracking-tight">SwagHunt</span>
+        <img
+          className="w-16 transform rotate-45"
+          src="/asset/rocket_green.svg"
+        />
       </div>
 
-      <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
-        <div class="text-sm lg:flex-grow">
+      <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto ">
+        <div className="text-lg lg:flex-grow">
           <Link href="/">
-            <a class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-8">
               Home
             </a>
           </Link>
 
           <Link href="/store">
-            <a class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-4">
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-8">
               Store
+            </a>
+          </Link>
+          <Link href="/rank">
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300 mr-8">
+              Ranking
             </a>
           </Link>
 
           <Link href="/request">
-            <a class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300">
-              Request New Swag
+            <a className="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-yellow-300">
+              Request
             </a>
           </Link>
         </div>
