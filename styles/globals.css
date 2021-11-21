@@ -7,8 +7,8 @@ body {
   margin: 0;
   font-family: monospace, "Times New Roman", Times, serif, Segoe UI, Roboto,
     Oxygen;
-
-  background: fixed url("/static/bg.png") no-repeat center;
+  color: #000;
+  background: fixed url("/static/bg.png") center center;
 
   /* background-color: rgba(102, 89, 89, 0.808); */
 }

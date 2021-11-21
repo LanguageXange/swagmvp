@@ -57,7 +57,7 @@ const SwagItem = (props) => {
     image = [{ url: "https://via.placeholder.com/300" }],
   } = props;
   const [disabled, setDisabled] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [tooltipMsg, setToolTipMsg] = useState("upvote me");
   const [success, setSuccess] = useState(false);
   const [localVote, setLocalVote] = useState(0);
   const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -80,9 +80,10 @@ const SwagItem = (props) => {
       const res = await handleUpvote(itemId);
       if (res) {
         setDisabled(true);
+        setToolTipMsg("Thanks for voting!");
       }
     } catch (err) {
-      setErrorMessage(err.message);
+      console.log(err);
     }
   };
   return (
@@ -122,13 +123,13 @@ const SwagItem = (props) => {
           <p>{desc}</p>
 
           <div className="card-actions">
-            <div data-tip="upvote me!" className="tooltip tooltip-right">
+            <div data-tip={tooltipMsg} className="tooltip tooltip-right">
               <button
                 className="animate-bounce glass rounded-lg pb-1 pt-2 px-8 text-lg hover:bg-green-400 disabled:animate-none disabled:cursor-not-allowed disabled:bg-gray-400 disabled:opacity-50"
                 onClick={handleClick}
                 disabled={isValidating || disabled}
               >
-                ⮝
+                👍
               </button>
             </div>
           </div>

@@ -1,13 +1,16 @@
-import { findAllSwags } from "../util/airtable";
-export async function getStaticProps() {
-  const myData = await findAllSwags();
-  return {
-    props: { ...myData },
-  };
-}
+import useSWR from "swr";
+import { useEffect, useState } from "react";
+const RankPage = () => {
+  const [updateData, setUpdateData] = useState([]);
+  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const { data, isValidating } = useSWR(`/api/getItems`, fetcher);
+  useEffect(() => {
+    if (data) {
+      setUpdateData(data);
+    }
+  }, [data]);
 
-const RankPage = (props) => {
-  const itemsArr = Object.values(props).sort((a, b) => b.votes - a.votes);
+  const sortedData = updateData.sort((a, b) => b.votes - a.votes);
   return (
     <div className="flex justify-center mx-auto my-12 ">
       <table className="table table-zebra w-11/12 md:w-9/12 bg-white">
@@ -19,18 +22,22 @@ const RankPage = (props) => {
             <th>Votes</th>
           </tr>
         </thead>
-        <tbody>
-          {itemsArr.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{item.name}</td>
-                <td>${item.price}</td>
-                <td>{item.votes}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+        {isValidating ? (
+          <div className="text-center text-2xl px-auto">loading .... </div>
+        ) : (
+          <tbody>
+            {sortedData.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.price == 0 ? "FREE" : `$${item.price}`}</td>
+                  <td>{item.votes}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        )}
       </table>
     </div>
   );

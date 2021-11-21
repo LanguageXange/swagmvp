@@ -13,7 +13,7 @@ const SwagStore = (props) => {
   const itemsArr = Object.values(props).sort((a, b) => a.itemId - b.itemId);
 
   return (
-    <div className="w-full p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-12 mx-auto max-w-7xl ">
+    <div className="w-full p-8 text-black grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-12 mx-auto max-w-7xl ">
       {itemsArr.map((item) => {
         return (
           <div
