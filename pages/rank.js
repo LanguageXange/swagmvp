@@ -12,7 +12,7 @@ const RankPage = () => {
 
   const sortedData = updateData.sort((a, b) => b.votes - a.votes);
   return (
-    <div className="flex justify-center mx-auto my-12 overflow-x-auto bg-white">
+    <div className="flex justify-center mx-auto my-12 overflow-x-auto bg-transparent">
       <table className="table table-zebra w-11/12 md:w-9/12 bg-white">
         <thead>
           <tr>
